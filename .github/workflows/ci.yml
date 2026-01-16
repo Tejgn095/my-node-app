@@ -25,3 +25,33 @@ jobs:
       - name: Run tests
         run: npm test
 
+# 1️⃣ Name of the workflow
+name: CI Pipeline
+
+# 2️⃣ Define triggers: when the workflow should run
+on:
+  push:
+    branches: [main]          # runs when code is pushed to 'main'
+  pull_request:
+    branches: [main]          # runs on pull requests targeting 'main'
+
+# 3️⃣ Define jobs
+jobs:
+  build:                       # a job called "build"
+    runs-on: ubuntu-latest      # environment (Linux)
+
+    steps:                      # sequence of steps in this job
+      - name: Checkout code
+        uses: actions/checkout@v3    # pull your repo code
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18           # Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
